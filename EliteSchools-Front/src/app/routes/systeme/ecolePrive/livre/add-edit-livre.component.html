@@ -1,0 +1,31 @@
+<page-header></page-header>
+<mat-toolbar color="primary" role="header" aria-label="Basic sidenav app">
+  <h3 class="demo-sidenav-app-name">{{editmode? 'Modifier livre' : 'Ajouter livre'}}</h3>
+</mat-toolbar>
+<br/>
+<mat-card>
+  <section>
+
+
+    <form [formGroup]="reactiveForm1" class="form-field-full">
+       <mat-form-field>
+        <mat-label>Nom livre</mat-label>
+        <input matInput  formControlName="nomLivre"    >
+        <mat-error *ngIf="reactiveForm1.get('nomLivre')?.invalid">
+          {{'validations.required' | translate}}
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Prix livre</mat-label>
+        <input matInput  formControlName="prixLivre"    >
+        <mat-error *ngIf="reactiveForm1.get('prixLivre')?.invalid">
+          {{'validations.required' | translate}}
+        </mat-error>
+      </mat-form-field>
+    </form>
+    <button mat-raised-button color="primary"  class="m-r-12" (click)="onSubmit()">{{editmode? 'Modifier' : 'Ajouter'}}</button>
+    <button mat-raised-button color="primary"  (click)="previousState()">Retour</button>
+
+  </section>
+</mat-card>

@@ -1,0 +1,219 @@
+<page-header></page-header>
+<p-toast></p-toast>
+<p-card>
+  <section>
+    <p-fieldset legend="Critères de recherches">
+      <div class="formgrid grid">
+        <div class="field col-12  md:col-5">
+          <label>Matière / Niveau</label>
+          <input type="text" pInputText value="{{matiere}}" required readonly class="inputfield w-full form-control">
+          <small class="p-error" *ngIf="submitted && !matiere">Obligatoire</small>
+        </div>
+
+        <div class="field col-12 md:col-1">
+          <label>&nbsp;</label>
+          <div class="w-full">
+            <button pButton type="button" (click)="openNew()">...</button>
+          </div>
+        </div>
+
+        <div class="field col-12  md:col-3">
+          <label>Mois</label>
+          <p-dropdown
+            autoWidth="false" [style]="{'width':'100%'}"
+            [options]="listMois"
+            optionLabel="name"
+            optionValue="name"
+            [showClear]="false"
+            [(ngModel)]="selectedMois"
+            placeholder="{{currentMonth()}}">
+          </p-dropdown>
+        </div>
+
+        <div class="field col-12  md:col-3">
+          <label>Groupe</label>
+          <p-dropdown
+            autoWidth="false" [style]="{'width':'100%'}"
+            [options]=groupes
+            optionLabel="intitule"
+            optionValue="intitule"
+            [showClear]="false"
+            [(ngModel)]="selectedGroupe"
+            placeholder="Sélectionner">
+          </p-dropdown>
+          <small class="p-error" *ngIf="submitted && !selectedGroupe">Obligatoire</small>
+        </div>
+
+        <div class="field col-12  md:col-5">
+          <label>Enseignant</label>
+          <input type="text" pInputText value="{{enseingant}}" readonly class="inputfield w-full form-control">
+          <small class="p-error" *ngIf="submitted && !enseingant">Obligatoire</small>
+        </div>
+
+        <div class="field col-12 md:col-1">
+          <label>&nbsp;</label>
+          <div class="w-full">
+            <button pButton type="button" (click)="openProf()">...</button>
+          </div>
+        </div>
+
+        <div class="field col-12 md:col-1">
+          <label>&nbsp;</label>
+          <div class="w-full">
+            <button pButton type="button" (click)="afficherListePresence()">Rechercher</button>
+          </div>
+        </div>
+      </div>
+    </p-fieldset>
+    <p-table #dt1 dataKey="id" [value]="listePresence"
+             [rows]="10" [showCurrentPageReport]="true" styleClass="p-datatable-gridlines"
+             [globalFilterFields]="['matricule','eleve.nomeleve','eleve.prenomeleve','cycleleve.code']">
+      <ng-template pTemplate="caption">
+        <div class="flex">
+          <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
+                           placeholder="Rechercher"/>
+              </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header" >
+        <tr>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              N°
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Matricule
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Verser
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Nom
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Prénom
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Séance 1
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Séance 2
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Séance 3
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Séance 4
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Séance 5
+            </div>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-elv let-i="rowIndex">
+        <tr>
+          <td style="text-align: center">{{i+1}}</td>
+          <td style="text-align: center">{{elv.idPayeParMat.numpaiement.inscription.matricule}}</td>
+          <td style="text-align: right">{{elv.idPayeParMat.numpaiement.verser}}</td>
+          <td>{{elv.idPayeParMat.numpaiement.inscription.eleve.nomeleve}}</td>
+          <td>{{elv.idPayeParMat.numpaiement.inscription.eleve.prenomeleve}}</td>
+          <td style="text-align: center">{{elv.jour1}} <p-checkbox (onChange)="updateSeance(elv,1)" [(ngModel)]=elv.seance1 [binary]="true"></p-checkbox></td>
+          <td style="text-align: center">{{elv.jour2}} <p-checkbox (onChange)="updateSeance(elv,2)" [(ngModel)]=elv.seance2 [binary]="true"></p-checkbox></td>
+          <td style="text-align: center">{{elv.jour3}} <p-checkbox (onChange)="updateSeance(elv,3)" [(ngModel)]=elv.seance3 [binary]="true"></p-checkbox></td>
+          <td style="text-align: center">{{elv.jour4}} <p-checkbox (onChange)="updateSeance(elv,4)" [(ngModel)]=elv.seance4 [binary]="true"></p-checkbox></td>
+          <td style="text-align: center">{{elv.jour5}} <p-checkbox (onChange)="updateSeance(elv,5)" [(ngModel)]=elv.seance5 [binary]="true"></p-checkbox></td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="7">Nombre d'élèves :</td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <br/>
+  </section>
+</p-card>
+
+
+<p-dialog [(visible)]="matiereDialog" [style]="{width: '800px'}"
+          header="Sélectionner une matière" [modal]="true">
+  <p-table #dt2 [value]="niveauScolaire" [paginator]="true" [rows]="6" responsiveLayout="scroll"
+           [showCurrentPageReport]="true" (onRowSelect)="onRowSelect()" selectionMode="single"
+           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+           [(selection)]="selectedNiveau" dataKey="idnivscolaire"
+           [globalFilterFields]="['idmatiere.matiere','cycleniv.cycleSclr']">
+    <ng-template pTemplate="caption">
+      <div class="flex">
+                <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt2.filterGlobal($any($event.target).value, 'contains')"
+                           placeholder="Rechercher"/>
+                </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Matière</th>
+        <th>Niveau scolaire</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-matiere>
+      <tr [pSelectableRow]="matiere">
+        <td>{{matiere.idmatiere.matiere}}</td>
+        <td>{{matiere.cycleniv.cycleSclr}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-dialog>
+
+<p-dialog [(visible)]="profDialog" [style]="{width: '800px'}"
+          header="Sélectionner un enseignant" [modal]="true">
+  <p-table #dt3 [value]="enseignants" [paginator]="true" [rows]="6" responsiveLayout="scroll"
+           [showCurrentPageReport]="true" (onRowSelect)="onRowSelect2()" selectionMode="single"
+           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+           [(selection)]="selectedProf" dataKey="idenseignant"
+           [globalFilterFields]="['nomenseignant','prenomensingant']">
+    <ng-template pTemplate="caption">
+      <div class="flex">
+                <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt3.filterGlobal($any($event.target).value, 'contains')"
+                           placeholder="Rechercher"/>
+                </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-prof>
+      <tr [pSelectableRow]="prof">
+        <td>{{prof.nomenseignant}}</td>
+        <td>{{prof.prenomensingant}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-dialog>

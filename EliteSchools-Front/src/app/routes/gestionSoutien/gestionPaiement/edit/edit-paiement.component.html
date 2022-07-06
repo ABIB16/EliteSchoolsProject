@@ -1,0 +1,359 @@
+<p-toast></p-toast>
+<page-header></page-header>
+<form class="form-field-full">
+  <p-fieldset legend="Informations élève">
+    <!--      <div class="col-9">-->
+    <div class="formgrid grid">
+      <div class="field col-12  md:col-4">
+        <label>Matricule</label>
+        <input type="text" pInputText value="{{matricule}}" class="inputfield w-full form-control">
+      </div>
+
+      <div class="field col-12  md:col-4">
+        <label>Nom</label>
+        <input type="text" pInputText value="{{nomEleve}}" class="inputfield w-full">
+      </div>
+
+      <div class="field col-12  md:col-4">
+        <label>Prénom</label>
+        <input type="text" pInputText value="{{prenomEleve}}" class="inputfield w-full">
+      </div>
+    </div>
+    <!--      </div>-->
+
+  </p-fieldset>
+  <p-fieldset legend="Matière">
+    <p-table #dt1 dataKey="id" [value]="listMatiereParMois"
+             [showCurrentPageReport]="true" styleClass="p-datatable-gridlines"
+             [globalFilterFields]="['matricule','eleve.nomeleve','eleve.prenomeleve','cycleleve.code']">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Matière
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Niveau scolaire
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Prix
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Remise
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Séance
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Net à payer
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Verser
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Reste
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Action
+            </div>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-paie>
+        <tr>
+          <td>{{paie.niveauscolaire.idmatiere.matiere}}</td>
+          <td>{{paie.niveauscolaire.cycleniv.cycleSclr}} </td>
+          <td>{{paie.niveauscolaire.prix}} </td>
+          <td>{{paie.remise}}</td>
+          <td>{{paie.nbrSeance}}/4</td>
+          <td>{{paie.netpayer}}</td>
+          <td>{{paie.verser}}</td>
+          <td>{{paie.reste}}</td>
+          <td>
+            <button pButton pRipple class="p-button-rounded p-button-success mr-2" icon="pi pi-pencil"
+                    (click)="showMatiere(paie)"
+                    matTooltip="Compléter paiement">
+            </button>
+            <button pButton pRipple class="p-button-rounded p-button-warning mr-2" icon="pi pi-pencil"
+                    (click)="showEditMatiere(paie)"
+                    matTooltip="Modifier">
+            </button>
+            <button pButton pRipple class="p-button-rounded p-button-warning mr-2" icon="pi pi-trash"
+                    (click)="deleteMatiere(paie)"
+                    matTooltip="Supprimer">
+            </button>
+            <button pButton pRipple class="p-button-rounded p-button-warning" icon="pi pi-pencil"
+                    (click)="openHistorique(paie)"
+                    matTooltip="Historique de modification">
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="7">No customers found.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-fieldset>
+  <p-fieldset legend="Paiement">
+    <div class="grid">
+      <div class="col-5">
+        <div class="formgrid grid">
+          <div class="field col-12  md:col-4">
+            <label>Montant total</label>
+            <input type="text" pInputText value="{{total}}" readonly class="inputfield w-full form-control">
+          </div>
+
+          <div class="field col-12  md:col-4">
+            <label>Total verser</label>
+            <input type="text" pInputText value="{{verser}}" readonly class="inputfield w-full">
+          </div>
+
+          <div class="field col-12  md:col-4">
+            <label>Total reste</label>
+            <input type="text" pInputText value="{{reste}}" readonly class="inputfield w-full">
+          </div>
+          <div class="field col-12  md:col-4">
+            <label>Mois</label>
+            <input type="text" pInputText value="{{moispaiement}}" class="inputfield w-full">
+          </div>
+        </div>
+      </div>
+      <div class="col-7">
+        <div class="formgrid grid">
+          <div class="field col-12  md:col-12">
+            <p-table #dt1 dataKey="id" [value]="listHistoP" [paginator]="true" [rows]="4" [showCurrentPageReport]="true"
+                     [showCurrentPageReport]="true" styleClass="p-datatable-gridlines">
+              <ng-template pTemplate="caption">
+                <div class="flex">
+                  <label>Historique de paiement</label>
+                </div>
+              </ng-template>
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>
+                    <div class="flex justify-content-center align-items-center">
+                      Matière
+                    </div>
+                  </th>
+                  <th>
+                    <div class="flex justify-content-center align-items-center">
+                      Verser
+                    </div>
+                  </th>
+                  <th>
+                    <div class="flex justify-content-center align-items-center">
+                      Type
+                    </div>
+                  </th>
+                  <th>
+                    <div class="flex justify-content-center align-items-center">
+                      Date
+                    </div>
+                  </th>
+                  <th>
+                    <div class="flex justify-content-center align-items-center">
+                      Payer par
+                    </div>
+                  </th>
+                  <th>
+                    <div class="flex justify-content-center align-items-center">
+                      Action
+                    </div>
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-histo>
+                <tr>
+                  <td>{{histo.nivsclr.idmatiere.matiere + " " + histo.nivsclr.cycleniv.code}}</td>
+                  <td>{{histo.mntverser}}</td>
+                  <td>{{histo.typePaiement}}</td>
+                  <td>{{histo.datepaimnt}}</td>
+                  <td></td>
+                  <td>
+                    <p-button styleClass="p-button-success" icon="pi pi-pencil"
+                              (click)="showEditHistoPaie(histo)" matTooltip="Modifier">
+                    </p-button>
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="7">No customers found.</td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </p-fieldset>
+  <br/>
+  <div class="formgrid grid">
+    <div class="field col-12  md:col-2 ">
+      <button pButton label="Ajouter" icon="pi pi-plus" type="button" (click)="onSubmit()"></button>
+    </div>
+    <div class="field col-12  md:col-1 ">
+      <button pButton label="Fermer" type="button" (click)="retour()" icon="pi pi-arrow-circle-left"
+              class="p-button-danger"></button>
+    </div>
+  </div>
+</form>
+
+<p-dialog [(visible)]="matiereDialog" [style]="{width: '350px',height:'530px'}" header="Compléter paiement"
+          [modal]="true" styleClass="p-fluid">
+  <ng-template pTemplate="content">
+    <p-fieldset legend="Matière : {{paiementParMatiere.niveauscolaire.idmatiere?.matiere}}">
+      <div class="formgrid grid">
+        <div class="field col-12  md:col-8">
+          <label>Nombre de présence</label>
+          <input type="text" pInputText maxlength="1" [(ngModel)]="nbr_pres" (keyup)="onKeyUp($event)"
+                 [readOnly]="desactivNbrP" class="inputfield w-full form-control">
+        </div>
+
+        <div class="field col-12  md:col-8">
+          <label>Montant à verser</label>
+          <p-inputNumber [(ngModel)]="resteEvent" [maxlength]="5" autofocus (keypress)="onKeyPress($event)"
+                         class="inputfield w-full form-control"></p-inputNumber>
+        </div>
+
+        <div class="field col-12  md:col-8">
+          <label>Type de paiement</label>
+          <p-dropdown
+            autoWidth="false" [style]="{'width':'100%'}"
+            [options]='[{typePaiement: "Espèces"}, {typePaiement: "Carte CIB"} ]'
+            [(ngModel)]="typePaiement"
+            optionLabel="typePaiement"
+            optionValue="typePaiement">
+          </p-dropdown>
+        </div>
+      </div>
+    </p-fieldset>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="editerRestePaiment()"></button>
+    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="closeDialog()"></button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="editMatiereDialog" [style]="{width: '350px',height:'530px'}" header="Modifier paiement"
+          [modal]="true" styleClass="p-fluid">
+  <ng-template pTemplate="content">
+    <p-fieldset legend="Matière : {{paiementParMatiere.niveauscolaire.idmatiere?.matiere}}">
+      <div class="formgrid grid">
+        <div class="field col-12  md:col-8">
+          <label>Remise</label>
+          <input type="text" pInputText maxlength="4" [(ngModel)]="paiementParMatiere.remise" (keyup)="onKeyUp($event)"
+                 [readOnly]="desactivNbrP" class="inputfield w-full form-control">
+        </div>
+
+        <div class="field col-12  md:col-8">
+          <label>Verser</label>
+          <p-inputNumber [(ngModel)]="paiementParMatiere.verser" [maxlength]="5" autofocus
+                         (keypress)="onKeyPress($event)" class="inputfield w-full form-control"></p-inputNumber>
+        </div>
+
+        <div class="field col-12  md:col-8">
+          <label>Nombre de présence</label>
+          <input type="text" pInputText maxlength="1" [(ngModel)]="paiementParMatiere.nbrSeance" required
+                 class="inputfield w-full form-control">
+          <small class="p-error" *ngIf="submitted && !paiementParMatiere.nbrSeance">Obligatoire</small>
+        </div>
+      </div>
+    </p-fieldset>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="modifParMat()"></button>
+    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="closeDialog3()"></button>
+  </ng-template>
+</p-dialog>
+
+
+<p-dialog [(visible)]="editHistoPaieDialog" [style]="{width: '350px',height:'460px'}" header="Modifier historique"
+          [modal]="true" styleClass="p-fluid">
+  <ng-template pTemplate="content">
+    <p-fieldset legend="Matière : {{detailpaiement.nivsclr.idmatiere.matiere}}">
+      <div class="formgrid grid">
+        <div class="field col-12  md:col-8">
+          <label>Verser</label>
+          <p-inputNumber [(ngModel)]="detailpaiement.mntverser" [maxlength]="5" autofocus
+                          class="inputfield w-full form-control"></p-inputNumber>
+        </div>
+        <div class="field col-12  md:col-8">
+          <label>Type de paiement</label>
+          <p-dropdown
+            autoWidth="false" [style]="{'width':'100%'}"
+            [options]='[{typePaiement: "Espèces"}, {typePaiement: "Carte CIB"} ]'
+            [(ngModel)]="detailpaiement.typePaiement"
+            optionLabel="typePaiement"
+            optionValue="typePaiement">
+          </p-dropdown>
+        </div>
+
+
+      </div>
+    </p-fieldset>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="modifHistorique()"></button>
+    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="closeDialog2()"></button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="historiqueMatiereDialog" [style]="{width: '800px'}"
+          header="Historique de modification" [modal]="true" styleClass="p-fluid">
+  <p-table #dt1 dataKey="id" [value]="listHistoMatiere" [paginator]="true" [rows]="4" [showCurrentPageReport]="true"
+           [showCurrentPageReport]="true" styleClass="p-datatable-gridlines">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>
+          <div class="flex justify-content-center align-items-center">
+            Date
+          </div>
+        </th>
+        <th>
+          <div class="flex justify-content-center align-items-center">
+            Modifier par
+          </div>
+        </th>
+        <th>
+          <div class="flex justify-content-center align-items-center">
+            Montant verser
+          </div>
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-histo>
+      <tr>
+        <td>{{histo.dateModif}}</td>
+        <td>{{histo.modifierPar}}</td>
+        <td>{{histo.montantModif}}</td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="7">Aucun historique</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

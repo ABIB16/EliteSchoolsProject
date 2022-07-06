@@ -1,0 +1,551 @@
+<p-toast></p-toast>
+<page-header></page-header>
+<form [formGroup]="eleveForm" class="form-field-full">
+  <p-tabView>
+    <p-tabPanel header="Informations personnelles">
+      <div class="grid">
+        <div class="col-9">
+          <p-card>
+            <div class="formgrid grid">
+              <div class="field col-12  md:col-6">
+                <label>Nom</label>
+                <input type="text" pInputText formControlName="nomeleve" class="inputfield w-full form-control">
+                <div *ngIf="formEleve.nomeleve.invalid && isSubmitted;" class="p-error">
+                  Veuillez saisir un nom
+                </div>
+              </div>
+
+              <div class="field col-12  md:col-6">
+                <label>اللقب</label>
+                <input type="text" pInputText formControlName="nomarabe" class="inputfield w-full">
+                <div *ngIf="formEleve.nomarabe.invalid && isSubmitted;" class="p-error">
+                  Veuillez saisir un nom en arabe
+                </div>
+              </div>
+
+              <div class="field col-12  md:col-6">
+                <label>Prénom</label>
+                <input type="text" pInputText formControlName="prenomeleve" class="inputfield w-full">
+                <div *ngIf="formEleve.prenomeleve.invalid && isSubmitted;" class="p-error">
+                  Veuillez saisir un prénom
+                </div>
+              </div>
+
+              <div class="field col-12  md:col-6">
+                <label>الإسم</label>
+                <input type="text" pInputText formControlName="prenomarabe" class="inputfield w-full">
+                <div *ngIf="formEleve.prenomarabe.invalid && isSubmitted;" class="p-error">
+                  Veuillez saisir un prénom en arabe
+                </div>
+              </div>
+
+              <div class="field col-12  md:col-6">
+                <label>Sexe</label>
+                <p-dropdown
+                  autoWidth="false" [style]="{'width':'100%'}"
+                  [options]='[{sexe: "Masculin"}, {sexe: "Féminin"} ]'
+                  optionLabel="sexe"
+                  formControlName="sexe"
+                  optionValue="sexe"
+                  [showClear]="false"
+                  placeholder="Sélectionner">
+                </p-dropdown>
+                <div *ngIf="formEleve.sexe.invalid && isSubmitted;" class="p-error">
+                  Veuillez sélectionner le sexe
+                </div>
+              </div>
+
+              <div class="field col-12  md:col-6">
+                <label>Date naissance</label>
+
+                <p-calendar formControlName="datenaissance" [style]="{'width':'100%'}" [showIcon]="true"
+                            inputId="icon"></p-calendar>
+                <div *ngIf="formEleve.datenaissance.invalid && isSubmitted;" class="p-error">
+                  Veuillez sélectionner une date de naissance
+                </div>
+              </div>
+
+              <div class="field col-12  md:col-6">
+                <label>Lieu naissance</label>
+                <input type="text" pInputText formControlName="lieunaiss" class="inputfield w-full">
+                <div *ngIf="formEleve.lieunaiss.invalid && isSubmitted;" class="p-error">
+                  Veuillez saisir un lieu de naissance
+                </div>
+              </div>
+
+              <div class="field col-12  md:col-6">
+                <label>École</label>
+                <p-dropdown
+                  [options]="ecoles"
+                  autoWidth="false" [style]="{'width':'100%'}"
+                  formControlName="ecole"
+                  optionLabel="nomecole"
+                  optionValue="nomecole"
+                  placeholder="Sélectionner une école"
+                  [filter]="true"
+                  [showClear]="true">
+                </p-dropdown>
+              </div>
+
+              <div class="field col-12  md:col-12">
+                <label>Remarques</label>
+                <textarea rows="3" cols="30" formControlName="remarques" [style]="{'width':'100%'}"
+                          pInputTextarea></textarea>
+              </div>
+
+              <div class="field col-12  md:col-6">
+                <label>Série BAC</label>
+                <input type="text" pInputText formControlName="seriebac" class="inputfield w-full">
+              </div>
+
+              <div class="field col-12  md:col-6">
+                <label>Série BEM</label>
+                <input type="text" pInputText formControlName="seriebem" class="inputfield w-full">
+              </div>
+
+              <div class="field col-12  md:col-6">
+                <label>Motif</label>
+                <input type="text" pInputText formControlName="motif" class="inputfield w-full">
+              </div>
+
+              <div class="field col-12  md:col-6">
+                <label>Photo</label>
+                <input type="file" accept="image/*" class="inputfield w-full" (change)="onImageUpload($event)"/>
+              </div>
+            </div>
+          </p-card>
+        </div>
+        <div class="col-3">
+          <p-card>
+            <div class="grid">
+              <div class="field col-12  md:col-12">
+                <img style="width: 100%" [src]="imageDisplay" alt=""/>
+              </div>
+            </div>
+          </p-card>
+        </div>
+      </div>
+      <br/>
+      <div class="formgrid grid">
+        <div class="field col-12  md:col-2 ">
+          <button pButton label="Ajouter" icon="pi pi-plus" type="button" (click)="onSubmit()"></button>
+        </div>
+        <div class="field col-12  md:col-1 ">
+          <button pButton label="Fermer" type="button" (click)="retour()" icon="pi pi-arrow-circle-left"
+                  class="p-button-danger"></button>
+        </div>
+      </div>
+    </p-tabPanel>
+
+    <p-tabPanel header="Contact">
+      <div class="grid">
+        <div class="col-12">
+          <p-fieldset legend="Adresse">
+            <div class="grid">
+              <div class="field col-12  md:col-12">
+                <label>Adresse</label>
+                <textarea rows="3" cols="30" formControlName="adresse" [style]="{'width':'100%'}"
+                          pInputTextarea></textarea>
+                <div *ngIf="formEleve.adresse.invalid && isSubmitted;" class="p-error">
+                  Veuillez saisir une adresse
+                </div>
+              </div>
+
+              <div class="field col-12  md:col-6">
+                <label>Wilaya</label>
+                <p-dropdown
+                  autoWidth="false" [style]="{'width':'100%'}"
+                  [options]="wilayas"
+                  formControlName="wilaya"
+                  optionLabel="nomWilaya"
+                  optionValue="codeWilaya"
+                  [filter]="true"
+                  filterBy="nomWilaya"
+                  [showClear]="true"
+                  (onChange)="onChange($event)"
+                  placeholder="Sélectionner une wilaya">
+                </p-dropdown>
+              </div>
+
+              <div class="field col-12  md:col-6">
+                <label>Commune</label>
+                <p-dropdown
+                  autoWidth="false" [style]="{'width':'100%'}"
+                  [options]="communes"
+                  formControlName="commune"
+                  optionLabel="nomCommune"
+                  optionValue="codeCommune"
+                  [filter]="true"
+                  filterBy="nomCommune"
+                  [showClear]="true"
+                  placeholder="Sélectionner une commune">
+                </p-dropdown>
+              </div>
+
+              <div class="field col-12  md:col-6">
+                <label>Email</label>
+                <input type="text" pInputText formControlName="mail" class="inputfield w-full">
+                <div class="p-error"
+                     *ngIf="(formEleve.mail.touched || isSubmitted) && formEleve.mail.errors?.required">
+                  Email is required
+                </div>
+                <div class="p-error"
+                     *ngIf="formEleve.mail.touched && formEleve.mail.errors?.email">
+                  Enter a valid email address
+                </div>
+              </div>
+            </div>
+          </p-fieldset>
+        </div>
+        <div class="col-12">
+          <p-fieldset legend="Numéros de téléphone">
+            <div class="grid">
+
+              <div class="field col-12  md:col-6">
+                <label>Téléphone 1</label>
+                <p-inputMask mask="99-99-99-99-99" formControlName="tel1" styleClass="w-full"></p-inputMask>
+                <div *ngIf="formEleve.tel1.invalid && isSubmitted;" class="p-error">
+                  Veuiller saisir un N° de tel
+                </div>
+              </div>
+
+              <div class="field col-12  md:col-6">
+                <label>Propriétaire</label>
+                <p-dropdown
+                  autoWidth="false" [style]="{'width':'100%'}"
+                  [options]='[{pro: "Elève"}, {pro: "Père"},{pro: "Mère"}, {pro: "Domicile"},{pro: "Proche"} ]'
+                  optionLabel="pro"
+                  formControlName="de1"
+                  optionValue="pro"
+                  [showClear]="true"
+                  placeholder="Sélectionner un propriétaire">
+                </p-dropdown>
+                <div *ngIf="formEleve.de1.invalid && isSubmitted;" class="p-error">
+                  Veuillez sélectionner un propriétaire
+                </div>
+              </div>
+
+              <div class="field col-12  md:col-6">
+                <label>Téléphone 2</label>
+                <p-inputMask mask="99-99-99-99-99" formControlName="tel2" styleClass="w-full"></p-inputMask>
+              </div>
+
+              <div class="field col-12  md:col-6">
+                <label>Propriétaire</label>
+                <p-dropdown
+                  [style]="{'width':'100%'}"
+                  [options]='[{pro: "Elève"}, {pro: "Père"},{pro: "Mère"}, {pro: "Domicile"},{pro: "Proche"} ]'
+                  optionLabel="pro"
+                  formControlName="de2"
+                  optionValue="pro"
+                  [showClear]="true"
+                  placeholder="Sélectionner un propriétaire">
+                </p-dropdown>
+              </div>
+
+              <div class="field col-12  md:col-6">
+                <label>Téléphone 3</label>
+                <p-inputMask mask="99-99-99-99-99" formControlName="tel3" styleClass="w-full"></p-inputMask>
+              </div>
+
+              <div class="field col-12  md:col-6">
+                <label>Propriétaire</label>
+                <p-dropdown
+                  autoWidth="false" [style]="{'width':'100%'}"
+                  [options]='[{pro: "Elève"}, {pro: "Père"},{pro: "Mère"}, {pro: "Domicile"},{pro: "Proche"} ]'
+                  optionLabel="pro"
+                  formControlName="de3"
+                  optionValue="pro"
+                  [showClear]="true"
+                  placeholder="Sélectionner un propriétaire">
+                </p-dropdown>
+              </div>
+            </div>
+          </p-fieldset>
+        </div>
+      </div>
+      <br/>
+      <div class="formgrid grid">
+        <div class="field col-12  md:col-2 ">
+          <button pButton label="Ajouter" icon="pi pi-plus" type="button" (click)="onSubmit()"></button>
+        </div>
+        <div class="field col-12  md:col-1 ">
+          <button pButton label="Fermer" type="button" (click)="retour()" icon="pi pi-arrow-circle-left"
+                  class="p-button-danger"></button>
+        </div>
+      </div>
+    </p-tabPanel>
+
+    <p-tabPanel header="Niveau scolaire">
+      <div fxLayout="row wrap" class="matero-row">
+        <div fxFlex="100" fxFlex.lt-sm="100" class="matero-col">
+          <p-card>
+            <div class="formgrid grid">
+              <div class="field col-12  md:col-4">
+                <label>Niveau scolaire</label>
+                <p-dropdown
+                  autoWidth="false" [style]="{'width':'100%'}"
+                  [options]="cycles"
+                  optionLabel="cycleSclr"
+                  optionValue="code"
+                  formControlName="cycleleve"
+                  [filter]="true"
+                  filterBy="cycleSclr"
+                  [showClear]="true"
+                  placeholder="Sélectionner un niveau scolaire">
+                </p-dropdown>
+                <div *ngIf="formEleve.cycleleve.invalid && isSubmitted;" class="p-error">
+                  Veuillez sélectionner un niveau scolaire
+                </div>
+              </div>
+            </div>
+            <div class="formgrid grid">
+              <div class="field col-12  md:col-2 ">
+                <button pButton label="Ajouter" icon="pi pi-plus" type="button" (click)="onSubmit()"></button>
+              </div>
+              <div class="field col-12  md:col-1 ">
+                <button pButton label="Fermer" type="button" (click)="retour()" icon="pi pi-arrow-circle-left"
+                        class="p-button-danger"></button>
+              </div>
+            </div>
+          </p-card>
+        </div>
+      </div>
+    </p-tabPanel>
+    <p-tabPanel header="Matières/Groupes">
+      <p-card>
+        <div class="formgrid grid">
+          <div class="field col-12  md:col-12">
+            <p-table #dt1 dataKey="id" [value]="inscriptionMatieresList" styleClass="p-datatable-gridlines"
+                     [rows]="5" [showCurrentPageReport]="true" editMode="cell"
+                     (onEditComplete)="onCellEdit($event)"        [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+              <ng-template pTemplate="caption">
+                <div class="flex">
+             <span class="p-input-icon-left ">
+                    <i class="pi pi-search"></i>
+          <button pButton pRipple label="Ajouter" (click)="openNew()" icon="pi pi-plus"
+                  class="p-button-success mr-2"></button>
+              </span>
+                </div>
+              </ng-template>
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>
+                    <div class="flex justify-content-center align-items-center">
+                      Matière
+                    </div>
+                  </th>
+                  <th>
+                    <div class="flex justify-content-center align-items-center">
+                      Niveau scolaire
+                    </div>
+                  </th>
+                  <th>
+                    <div class="flex justify-content-center align-items-center">
+                      Groupe
+                    </div>
+                  </th>
+                  <th>
+                    <div class="flex justify-content-center align-items-center">
+                      Enseignant
+                    </div>
+                  </th>
+                  <th>
+                    <div class="flex justify-content-center align-items-center">
+                      Remise
+                    </div>
+                  </th>
+                  <th>
+                    <div class="flex justify-content-center align-items-center">
+                      R.Personnel
+                    </div>
+                  </th>
+                  <th>
+                    <div class="flex justify-content-center align-items-center">
+                      R.Enseignant
+                    </div>
+                  </th>
+                  <th>
+                    <div class="flex justify-content-center align-items-center">
+                      Action
+                    </div>
+                  </th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-mat>
+                <tr>
+                  <td>{{mat.idInscriptionMatiere}}</td>
+                  <td>{{mat.niveauscolaire.cycleniv.cycleSclr}}</td>
+                  <td pEditableColumn [pEditableColumn]="mat">
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <p-dropdown
+                          autoWidth="false"
+                          [options]="groupes"
+                          optionLabel="intitule"
+                          optionValue="intitule"
+                          [(ngModel)]="mat.groupe"
+                          [ngModelOptions]="{standalone: true}"
+                          [filter]="true"
+                          filterBy="intitule"
+                          placeholder="Sélectionner"
+                        >
+                        </p-dropdown>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{mat.groupe}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td pEditableColumn [pEditableColumn]="mat">
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <p-dropdown
+                          autoWidth="false"
+                          [options]="enseignants"
+                          optionLabel="nomenseignant"
+                          optionValue="nomenseignant"
+                          [(ngModel)]="mat.nomProf"
+                          [ngModelOptions]="{standalone: true}"
+                          [filter]="true"
+                          filterBy="nomenseignant"
+                          placeholder="Sélectionner"
+                          [showClear]="true">
+                        </p-dropdown>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{mat.nomProf}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td pEditableColumn  [pEditableColumn]="mat">
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <input type="text" pInputText class="inputfield w-full" [ngModelOptions]="{standalone: true}"
+                             [(ngModel)]="mat.remise">
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{mat.remise}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td pEditableColumn [pEditableColumn]="mat">
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <p-dropdown
+                          autoWidth="false"
+                          [options]="personnels"
+                          [(ngModel)]="mat.remisePersonnel"
+                          [ngModelOptions]="{standalone: true}"
+                          optionLabel="nompersn"
+                          optionValue="nompersn"
+                          [filter]="true"
+                          filterBy="nompersn"
+                          [showClear]="true"
+                          placeholder="Sélectionner">
+                        </p-dropdown>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{mat.remisePersonnel}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td pEditableColumn [pEditableColumn]="mat">
+                    <p-cellEditor>
+                      <ng-template pTemplate="input">
+                        <p-dropdown
+                          autoWidth="false"
+                          [options]="enseignants"
+                          optionLabel="nomenseignant"
+                          optionValue="nomenseignant"
+                          [(ngModel)]="mat.remiseProf"
+                          [ngModelOptions]="{standalone: true}"
+                          [filter]="true"
+                          filterBy="nomenseignant"
+                          placeholder="Sélectionner"
+                          [showClear]="true">
+                        </p-dropdown>
+                      </ng-template>
+                      <ng-template pTemplate="output">
+                        {{mat.remiseProf}}
+                      </ng-template>
+                    </p-cellEditor>
+                  </td>
+                  <td>
+                    <p-button
+                      (click)="null"
+                      styleClass="p-button-success"
+                      icon="pi pi-pencil"
+                    ></p-button>
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="emptymessage">
+                <tr>
+                  <td colspan="7">No customers found.</td>
+                </tr>
+              </ng-template>
+            </p-table>
+            <br/>
+            <div class="formgrid grid">
+              <div class="field col-12  md:col-2 ">
+                <button pButton label="Ajouter" icon="pi pi-plus" type="button" (click)="onSubmit()"></button>
+              </div>
+              <div class="field col-12  md:col-1 ">
+                <button pButton label="Fermer" type="button" (click)="retour()" icon="pi pi-arrow-circle-left"
+                        class="p-button-danger"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--        </form>-->
+      </p-card>
+
+      <p-dialog [(visible)]="matiereDialog" [style]="{width: '800px'}"
+                header="Sélectionner des matières" [modal]="true" styleClass="p-fluid">
+        <p-table #dt2 [value]="niveauScolaire" selectionMode="multiple" [paginator]="true" [rows]="6"
+                 [showCurrentPageReport]="true" responsiveLayout="scroll"
+                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                 [(selection)]="selectedNiveau" dataKey="idnivscolaire"
+                 [globalFilterFields]="['idmatiere.matiere','cycleniv.cycleSclr']">
+          <ng-template pTemplate="caption">
+            <div class="flex">
+                <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt2.filterGlobal($any($event.target).value, 'contains')"
+                           placeholder="Rechercher"/>
+                </span>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th style="width: 3rem">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+              </th>
+              <th>Matière</th>
+              <th>Niveau scolaire</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-matiere let-rowIndex="rowIndex">
+            <tr [pSelectableRow]="matiere" [pSelectableRowIndex]="rowIndex">
+              <td>
+                <p-tableCheckbox [value]="matiere"></p-tableCheckbox>
+              </td>
+              <td>{{matiere.idmatiere.matiere}}</td>
+              <td>{{matiere.cycleniv.cycleSclr}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <br/>
+        <div class="formgrid  grid">
+          <div class="col-2">
+            <button pButton label="Ajouter" icon="pi pi-check" (click)="addMatiere()"></button>
+          </div>
+          <div class="col-2">
+            <button pButton label="Fermer" icon="pi pi-times" class="p-button-danger" (click)="closeDialog()"></button>
+          </div>
+        </div>
+      </p-dialog>
+    </p-tabPanel>
+  </p-tabView>
+</form>

@@ -1,0 +1,428 @@
+{
+  "menu": [
+    {
+      "route": "dashboard",
+      "name": "dashboard",
+      "type": "link",
+      "icon": "dashboard"
+    },
+    {
+      "route": "cours-de-soutien",
+      "name": "cours-de-soutien",
+      "type": "sub",
+      "icon": "favorite",
+      "children": [
+        {
+          "route": "",
+          "name": "gestion-eleve",
+          "type": "sub",
+          "children": [
+            {
+              "route": "ajouter-eleve",
+              "name": "ajouter-eleve",
+              "type": "link"
+            },
+            {
+              "route": "listEleves",
+              "name": "listEleves",
+              "type": "link"
+            },
+            {
+              "route": "liste-eleves-preinscrits",
+              "name": "liste-eleves-preinscrits",
+              "type": "link"
+            },
+            {
+              "route": "mise-a-jour-des-eleves",
+              "name": "mise-a-jour-des-eleves",
+              "type": "link"
+            },
+            {
+              "route": "liste-de-presence",
+              "name": "liste-de-presence",
+              "type": "link"
+            },
+            {
+              "route": "liste-de-presence-des-annees-precedentes",
+              "name": "liste-de-presence-des-annees-precedentes",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "route": "",
+          "name": "gestion-paiement",
+          "type": "sub",
+          "children": [
+            {
+              "route": "listPaiement",
+              "name": "listPaiement",
+              "type": "link"
+            },
+            {
+              "route": "recette-jour",
+              "name": "recette-jour",
+              "type": "link"
+            },
+            {
+              "route": "impaye",
+              "name": "impaye",
+              "type": "link"
+            },
+            {
+              "route": "impaye-precedent",
+              "name": "impaye-precedent",
+              "type": "link"
+            },
+            {
+              "route": "historique-supp",
+              "name": "historique-supp",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "route": "emploi-temps",
+          "name": "emploi-temps",
+          "type": "sub",
+          "children": [
+            {
+              "route": "emploi-temp",
+              "name": "emploi-temp",
+              "type": "link"
+            },
+            {
+              "route": "planning",
+              "name": "planning",
+              "type": "link"
+            }
+          ]
+        }
+      ],
+      "permissions": {
+        "except": [
+          "MANAGER",
+          "GUEST"
+        ]
+      }
+    },
+    {
+      "route": "langues-etrangere",
+      "name": "langues-etrangere",
+      "type": "sub",
+      "icon": "favorite",
+      "children": [
+        {
+          "route": "gestion-etudiant",
+          "name": "gestion-etudiant",
+          "type": "sub",
+          "children": [
+            {
+              "route": "ajouter-etudiant",
+              "name": "ajouter-etudiant",
+              "type": "link"
+            }, {
+              "route": "liste-des-etudiant",
+              "name": "liste-des-etudiant",
+              "type": "link"
+            },
+            {
+              "route": "Liste-des-etudiant-preinscrits",
+              "name": "Liste-des-etudiant-preinscrits",
+              "type": "link"
+            },
+            {
+              "route": "liste-de-presence",
+              "name": "liste-de-presence",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "route": "gestion-paiement",
+          "name": "gestion-paiement",
+          "type": "sub",
+          "children": [
+            {
+              "route": "paiement",
+              "name": "paiement",
+              "type": "link"
+            },
+            {
+              "route": "recette-jour",
+              "name": "recette-jour",
+              "type": "link"
+            },
+            {
+              "route": "impaye",
+              "name": "impaye",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "route": "suivi-planning",
+          "name": "suivi-planning",
+          "type": "sub",
+          "children": [
+            {
+              "route": "groupe-lancer",
+              "name": "groupe-lancer",
+              "type": "link"
+            },
+            {
+              "route": "groupe-operationnel",
+              "name": "groupe-operationnel",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "route": "fiche-pointage",
+          "name": "fiche-pointage",
+          "type": "sub",
+          "children": [
+            {
+              "route": "fiche",
+              "name": "fiche",
+              "type": "link"
+            }
+          ]
+        }
+      ],
+      "permissions": {
+        "except": [
+          "MANAGER",
+          "GUEST"
+        ]
+      }
+    },
+    {
+      "route": "ecole-privee",
+      "name": "ecole-privee",
+      "type": "sub",
+      "icon": "favorite",
+      "children": [
+        {
+          "route": "gestion-eleve",
+          "name": "gestion-eleve",
+          "type": "sub",
+          "children": [
+            {
+              "route": "ajouter-eleve",
+              "name": "ajouter-eleve",
+              "type": "link"
+            }, {
+              "route": "liste-des-eleves",
+              "name": "liste-des-eleves",
+              "type": "link"
+            },
+            {
+              "route": "Liste-des-eleves-preinscrits",
+              "name": "Liste-des-eleves-preinscrits",
+              "type": "link"
+            },
+            {
+              "route": "mise-a-jour-des-eleves",
+              "name": "mise-a-jour-des-eleves",
+              "type": "link"
+            },
+            {
+              "route": "liste-de-presence",
+              "name": "liste-de-presence",
+              "type": "link"
+            },
+            {
+              "route": "liste-de-presence-des-annees-precedentes",
+              "name": "liste-de-presence-des-annees-precedentes",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "route": "gestion-paiement",
+          "name": "gestion-paiement",
+          "type": "sub",
+          "children": [
+            {
+              "route": "paiement",
+              "name": "paiement",
+              "type": "link"
+            },
+            {
+              "route": "recette-jour",
+              "name": "recette-jour",
+              "type": "link"
+            },
+            {
+              "route": "impaye",
+              "name": "impaye",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "route": "fiche-pointage",
+          "name": "fiche-pointage",
+          "type": "sub",
+          "children": [
+            {
+              "route": "fiche",
+              "name": "fiche",
+              "type": "link"
+            }
+          ]
+        }
+      ],
+      "permissions": {
+        "except": [
+          "MANAGER",
+          "GUEST"
+        ]
+      }
+    },
+    {
+      "route": "reporting",
+      "name": "reporting",
+      "type": "sub",
+      "icon": "format_line_spacing",
+      "children": [
+        {
+          "route": "stat",
+          "name": "stat",
+          "type": "link"
+        },
+        {
+          "route": "historique-paiement",
+          "name": "historique-paiement",
+          "type": "link"
+        },
+        {
+          "route": "historique-suppression",
+          "name": "historique-suppression",
+          "type": "link"
+        },
+        {
+          "route": "admin",
+          "name": "admin",
+          "type": "link"
+        },
+        {
+          "route": "fiche-paie",
+          "name": "fiche-paie",
+          "type": "link"
+        }
+      ],
+      "permissions": {
+        "except": "GUEST"
+      }
+    },
+    {
+      "route": "administration",
+      "name": "administration",
+      "type": "sub",
+      "icon": "question_answer",
+      "children": [
+        {
+          "route": "admin",
+          "name": "admin",
+          "type": "sub",
+          "children": [
+            {
+              "route": "user",
+              "name": "user",
+              "type": "link"
+            },
+            {
+              "route": "profil",
+              "name": "profil",
+              "type": "link"
+            },
+            {
+              "route": "privilege",
+              "name": "privilege",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "route": "",
+          "name": "donnee-base-soutien",
+          "type": "sub",
+          "children": [
+            {
+              "route": "anneeScolaire",
+              "name": "anneeScolaire",
+              "type": "link"
+            },
+            {
+              "route": "niveaux",
+              "name": "niveaux",
+              "type": "link"
+            },
+            {
+              "route": "groupes",
+              "name": "groupes",
+              "type": "link"
+            },
+            {
+              "route": "matieres",
+              "name": "matieres",
+              "type": "link"
+            },
+            {
+              "route": "enseignants",
+              "name": "enseignants",
+              "type": "link"
+            },
+            {
+              "route": "personnel",
+              "name": "personnel",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "route": "donnee-base-formation",
+          "name": "donnee-base-formation",
+          "type": "link"
+        },
+        {
+          "route": "",
+          "name": "donnee-base-prive",
+          "type": "sub",
+          "children": [
+            {
+              "route": "livres",
+              "name": "livres",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "route": "depense-avance",
+          "name": "depense-avance",
+          "type": "link"
+        },
+        {
+          "route": "pointage-personnel",
+          "name": "pointage-personnel",
+          "type": "link"
+        },
+        {
+          "route": "msg-notification",
+          "name": "msg-notification",
+          "type": "link"
+        },
+        {
+          "route": "bloc-note",
+          "name": "bloc-note",
+          "type": "link"
+        }
+      ],
+      "permissions": {
+        "only": "ADMIN"
+      }
+    }
+  ]
+}

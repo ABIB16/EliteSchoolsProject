@@ -1,0 +1,106 @@
+<page-header></page-header>
+<p-card>
+  <section>
+    <p-table #dt1 dataKey="id" [value]="listeleve?.content"
+             [rows]="size" [showCurrentPageReport]="true" styleClass="p-datatable-gridlines"
+             [globalFilterFields]="['matricule','eleve.nomeleve','eleve.prenomeleve','cycleleve.code']">
+      <ng-template pTemplate="caption">
+
+        <div class="flex">
+          <button pButton pRipple label="Ajouter" routerLink="ajouter-eleve" icon="pi pi-plus"
+                  class="p-button-success mr-2"></button>
+          <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
+                           placeholder="Rechercher"/>
+              </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Matricule
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Nom
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Prénom
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Niveau scolaire
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Statut
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Imprimer
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Action
+            </div>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-elv>
+        <tr>
+          <td>{{elv.matricule}}</td>
+          <td>
+            <img [src]="this.transform(imageLocation +elv.photo)" width="32" style="vertical-align: middle"/>
+            {{elv.nomeleve}} {{elv.nomarabe}}
+          </td>
+          <td>{{elv.prenomeleve}} {{elv.prenomarabe}}</td>
+          <td>{{elv.cycleleve}}</td>
+          <td>{{elv.statut}}</td>
+          <td></td>
+          <td>
+            <p-button styleClass="p-button-success" icon="pi pi-pencil" routerLink="modifier-eleve/{{elv.ideleve}}" matTooltip="Modifier" ></p-button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="7">No customers found.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <br/>
+    <div class="flex justify-content-center">
+<!--      <label styleClass="p-button-text">Showing {{size}} to {{size * (currentPage + 1)}} of {{(pages) * size}}-->
+<!--        entries</label>-->
+      <p-button type="button"  icon="pi pi-chevron-left" (click)="prev()" [disabled]="isFirstPage()" styleClass="p-button-text"></p-button>
+      <p-button type="button" icon="pi pi-refresh" (click)="reset()" styleClass="p-button-text"></p-button>
+      <p-button type="button" icon="pi pi-chevron-right" (click)="next()" [disabled]="isLastPage()" styleClass="p-button-text"></p-button>
+      <p-dropdown
+        autoWidth="false"
+        [options]='[{size: 5}, {size: 10},{size: 15},{size: 20} ]'
+        optionLabel="size"
+        optionValue="size"
+        (onChange)="onChange($event)">
+      </p-dropdown>
+
+    </div>
+
+    <!--    <div class="container">-->
+    <!--      <ul class="nav nav-pills">-->
+    <!--        <li [ngClass]="{'active':i===currentPage}" *ngFor="let p of pages; let i=index" >-->
+    <!--        <a class="clickable" (click)="gotoPage(i)"> {{i}}</a>-->
+    <!--        </li>-->
+    <!--      </ul>-->
+    <!--    </div>-->
+  </section>
+</p-card>
+
