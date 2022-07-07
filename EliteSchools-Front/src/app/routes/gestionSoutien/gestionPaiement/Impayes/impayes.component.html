@@ -1,0 +1,80 @@
+<p-toast></p-toast>
+<page-header></page-header>
+<p-card>
+  <section>
+    <p-button styleClass="p-button-success" icon="pi pi-pencil"    matTooltip="Modifier" ></p-button>
+    <p-table #dt1 dataKey="id" [value]="listPaiement?.content"
+             [rows]="size" [showCurrentPageReport]="true" styleClass="p-datatable-gridlines font-size: 5px !important"
+             [globalFilterFields]="['matricule','eleve.nomeleve','eleve.prenomeleve','cycleleve.code']">
+      <ng-template pTemplate="caption">
+
+        <div class="flex">
+          <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt1.filterGlobal($any($event.target).value, 'contains')"
+                           placeholder="Rechercher"/>
+              </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header" >
+        <tr>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Matricule
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Nom
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Prénom
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Niveau scolaire
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Reste à payer
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Antécédent
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Action
+            </div>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-paie>
+        <tr>
+          <td>{{paie.inscription.matricule}}</td>
+          <td>{{paie.inscription.eleve.nomeleve}} </td>
+          <td>{{paie.inscription.eleve.prenomeleve}} </td>
+          <td>{{paie.inscription.cycleleve.code}}</td>
+          <td>{{paie.reste}}</td>
+          <td>
+          </td>
+          <td>
+            <p-button styleClass="p-button-success " icon="pi pi-pencil" [queryParams]="{ id: paie.idpaiement,elv:paie.inscription.eleve.ideleve,mois:paie.moispaiement}" [routerLink]="['modifier-paiement']"  matTooltip="Modifier" ></p-button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="7">No customers found.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </section>
+</p-card>
+

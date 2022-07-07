@@ -56,6 +56,11 @@ public class PaiementController {
         return paiementService.findAllAntecedent(12169).stream().map(this::convertEntityToDto).collect(Collectors.toList());
     }
 
+    @GetMapping("/listImpaye")
+    public List<PaiementDto> findAll(String mois) {
+        return paiementService.getImpayes(mois).stream().map(this::convertEntityToDto).collect(Collectors.toList());
+    }
+
     @GetMapping("/genererPaiement")
     public Page<PaiementDto> genererPaiement(@RequestParam(name = "page") int page, @RequestParam(name = "size") int size) {
         Pageable paging = PageRequest.of(page, size);

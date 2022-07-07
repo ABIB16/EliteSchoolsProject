@@ -1,7 +1,40 @@
-th, td {
-  font-size: 1.125rem;
+.p-table .p-table-header {
+  background: #f8f9fa;
+  color: #343a40;
+  border: 1px solid #dee2e6;
+  border-width: 1px 0 1px 0;
+  padding: 0.5rem 1rem !important;
+  font-weight: 700;}
+
+td {
+  font-size: 1rem;
+  padding: 0rem 1rem !important;
+  font-family: Arial;
+  color: rgb(0 0 0);
+}
+
+
+
+th {
+  font-size: 1rem;
+  padding: 0.5rem 1rem ;
+  font-family: Arial;
+  color: #1d4ed8 !important;
 }
 
 img {
   border-radius: 50%;
 }
+
+//height: 40px !important;
+//width:40px !important;
+.p-button.p-button-icon-only.p-button-rounded button{
+
+}
+
+button {
+  height: 40px !important;
+  width: 40px !important;
+}
+
+

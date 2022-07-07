@@ -26,6 +26,8 @@ public class PaiementService {
     @Autowired
     private PaiementRepository paiementRepository;
     @Autowired
+    private JourRepository jourRepository;
+    @Autowired
     private ListePresenceRepository listPresenceRepository;
     @Autowired
     private InscriptionRepository inscriptionRepository;
@@ -51,11 +53,11 @@ public class PaiementService {
     private PaiementParMatiere testMat = new PaiementParMatiere();
     private HistoriqueModification historiqueModification = new HistoriqueModification();
     private ListePresence presence;
-    private String currentmois;
+    private String currentmois,choixMois;
     private Date currentDate;
     private List<InscriptionMatiere> listeInscriptionMatiere = new ArrayList<>();
     private Inscription inscriptionTest = new Inscription();
-    private List<Paiement> listePaiement;
+    private List<Paiement> listePaiement,impayes;
     private List<Inscription> listeEleveParAnnee;
     private List<Detailpaiement> detailpaiementList;
     private Detailpaiement detailpaiement = new Detailpaiement();
@@ -221,6 +223,11 @@ public class PaiementService {
         return listePaiementByMois;
     }
 
+    public List<Paiement> getImpayes(String mois) {
+        impayes = paiementRepository.listeRestePayer(choixMois);
+        return impayes;
+    }
+
     public void editerRestePaiment(PaiementParMatiere paieParMatiere, int mntverser, String typePaiement) {
         paiementParMatiereRepository.save(paieParMatiere);
         paiement = findById(paieParMatiere.getNumpaiement().getIdpaiement());
@@ -372,6 +379,18 @@ public class PaiementService {
         String mat = annee.getConcatenation();
         entity.setIdModif(suivantIdMax(mat));
         historiqueModificationRepository.save(entity);
+    }
+
+    public String getChoixMois() {
+        if (choixMois == null) {
+            choixMois = jourRepository.findMoisPrc(new Date().getMonth());
+            System.out.println("ddddddddddddddddd "+choixMois);
+        }
+        return choixMois;
+    }
+
+    public void setChoixMois(String choixMois) {
+        this.choixMois = choixMois;
     }
 
 

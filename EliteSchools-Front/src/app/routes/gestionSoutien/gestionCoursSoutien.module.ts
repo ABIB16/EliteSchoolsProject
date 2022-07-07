@@ -26,6 +26,7 @@ import {EditPaiementComponent} from "./gestionPaiement/edit/edit-paiement.compon
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {ListPresenceComponent} from "./gestionEleve/ListPresence/list-presence.component";
 import {CheckboxModule} from "primeng/checkbox";
+import {ImpayesComponent} from "./gestionPaiement/Impayes/impayes.component";
 
 
 const COMPONENTS: any[] = [
@@ -37,7 +38,8 @@ const COMPONENTS: any[] = [
   ListAncienElevesComponent,
   ListPresenceComponent,
   ListPaiementComponent,
-  EditPaiementComponent
+  EditPaiementComponent,
+  ImpayesComponent
 ];
 const COMPONENTS_DYNAMIC: any[] = [];
 

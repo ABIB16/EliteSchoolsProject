@@ -27,6 +27,8 @@ public interface PaiementRepository extends JpaRepository<Paiement,String> {
     @Query("SELECT p FROM Paiement p WHERE p.inscription.idanne.anneecourante= true AND p.moispaiement=?1 AND p.inscription.eleve.ideleve=?2")
     public Paiement findByAnneeMois(String mois, Integer elv) ;
 
+    @Query("SELECT p FROM Paiement p WHERE p.reste <> 0 and p.moispaiement =?1 AND p.inscription.idanne.anneecourante=true order by p.inscription.matricule DESC ")
+    public List<Paiement>  listeRestePayer(String mois) ;
 
 }
 

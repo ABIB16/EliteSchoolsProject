@@ -9,6 +9,7 @@ import {EditEleveMajComponent} from "./gestionEleve/Edit/edit-eleve-maj.componen
 import {ListPaiementComponent} from "./gestionPaiement/ListPaiement/list-paiement.component";
 import {EditPaiementComponent} from "./gestionPaiement/edit/edit-paiement.component";
 import {ListPresenceComponent} from "./gestionEleve/ListPresence/list-presence.component";
+import {ImpayesComponent} from "./gestionPaiement/Impayes/impayes.component";
 
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'liste-eleves-preinscrits', component: ListElevePreinscritComponent, },
   { path: 'mise-a-jour-des-eleves', component: ListAncienElevesComponent, },
   { path: 'listPaiement', component: ListPaiementComponent, },
+  { path: 'impaye', component: ImpayesComponent, },
   { path: 'listPaiement/modifier-paiement', component: EditPaiementComponent, },
   //{ path: 'livres/:id/edit', component: AddEditLivreComponent },
   //{ path: 'livres/add', component: AddEditLivreComponent }
