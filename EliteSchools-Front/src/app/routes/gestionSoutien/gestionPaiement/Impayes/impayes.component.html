@@ -3,8 +3,8 @@
 <p-card>
   <section>
     <p-button styleClass="p-button-success" icon="pi pi-pencil"    matTooltip="Modifier" ></p-button>
-    <p-table #dt1 dataKey="id" [value]="listPaiement?.content"
-             [rows]="size" [showCurrentPageReport]="true" styleClass="p-datatable-gridlines font-size: 5px !important"
+    <p-table #dt1 dataKey="id" [value]="listImpaye"
+             [rows]="5" [showCurrentPageReport]="true" styleClass="p-datatable-gridlines font-size: 5px !important"
              [globalFilterFields]="['matricule','eleve.nomeleve','eleve.prenomeleve','cycleleve.code']">
       <ng-template pTemplate="caption">
 
@@ -35,17 +35,22 @@
           </th>
           <th>
             <div class="flex justify-content-center align-items-center">
-              Niveau scolaire
+              Niveau
             </div>
           </th>
           <th>
             <div class="flex justify-content-center align-items-center">
-              Reste à payer
+              Total
             </div>
           </th>
           <th>
             <div class="flex justify-content-center align-items-center">
-              Antécédent
+              Verser
+            </div>
+          </th>
+          <th>
+            <div class="flex justify-content-center align-items-center">
+              Reste
             </div>
           </th>
           <th>
@@ -61,9 +66,9 @@
           <td>{{paie.inscription.eleve.nomeleve}} </td>
           <td>{{paie.inscription.eleve.prenomeleve}} </td>
           <td>{{paie.inscription.cycleleve.code}}</td>
+          <td>{{paie.total}}</td>
+          <td>{{paie.verser}}</td>
           <td>{{paie.reste}}</td>
-          <td>
-          </td>
           <td>
             <p-button styleClass="p-button-success " icon="pi pi-pencil" [queryParams]="{ id: paie.idpaiement,elv:paie.inscription.eleve.ideleve,mois:paie.moispaiement}" [routerLink]="['modifier-paiement']"  matTooltip="Modifier" ></p-button>
           </td>

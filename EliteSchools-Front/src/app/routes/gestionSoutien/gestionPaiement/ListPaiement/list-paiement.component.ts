@@ -41,14 +41,14 @@ export class ListPaiementComponent implements OnInit {
       })
   }
 
-  private getPaiementAntecedant() {
+  /*private getPaiementAntecedant() {
     this.paiementService.getAllPaiementAntecedent(2)
       .subscribe((data) => {
         console.log("antecedennnnnnnnnnnnnt "+data);
         this.listPaiement = data;
 
       })
-  }
+  }*/
 
   gotoPage(i: number) {
     this.currentPage = i;

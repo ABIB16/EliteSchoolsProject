@@ -223,8 +223,9 @@ public class PaiementService {
         return listePaiementByMois;
     }
 
-    public List<Paiement> getImpayes(String mois) {
-        impayes = paiementRepository.listeRestePayer(choixMois);
+    public List<Paiement> getImpayes() {
+        impayes = paiementRepository.listeRestePayer("Juillet");
+        System.out.println("moisssssssssssss "+getChoixMois());
         return impayes;
     }
 

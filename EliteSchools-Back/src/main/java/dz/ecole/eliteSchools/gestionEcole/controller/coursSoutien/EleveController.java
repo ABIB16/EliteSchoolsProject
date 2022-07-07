@@ -77,12 +77,6 @@ public class EleveController {
     }
 
 
-   /* @GetMapping("/listEleves")
-    public List<InscriptionDto> findAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
-        Pageable paging = PageRequest.of(page, size);
-        return eleveMapper.modelToDto(inscriptionService.findByEleveannee(true,paging));
-    }*/
-
     @PostMapping("/addEleve")
     public Eleve createEleve(@RequestBody Eleve eleve,  @RequestParam CycleScolaire cycle) {
         eleveService.addEleve(eleve, cycle);

@@ -57,8 +57,8 @@ public class PaiementController {
     }
 
     @GetMapping("/listImpaye")
-    public List<PaiementDto> findAll(String mois) {
-        return paiementService.getImpayes(mois).stream().map(this::convertEntityToDto).collect(Collectors.toList());
+    public List<PaiementDto> findAll() {
+        return paiementService.getImpayes().stream().map(this::convertEntityToDto).collect(Collectors.toList());
     }
 
     @GetMapping("/genererPaiement")

@@ -32,8 +32,8 @@ export class PaiementService {
     return this.http.get<PaiementParMatiere[]>(`${this.baseUrl}/eleve/paiementMatiere?id=${idEleve}&mois=${mois}`);
   }
 
-  getAllPaiementAntecedent(ideleve: number): Observable<Paiement[]> {
-    return this.http.get<Paiement[]>(`${this.baseUrl+"/listAntecedent"}`);
+  getListImpaye(mois: String): Observable<Paiement[]> {
+    return this.http.get<Paiement[]>(this.baseUrl+"/listImpaye?mois="+mois);
   }
 
   getDetailPaiement(idPaiement: string): Observable<Paiement> {
