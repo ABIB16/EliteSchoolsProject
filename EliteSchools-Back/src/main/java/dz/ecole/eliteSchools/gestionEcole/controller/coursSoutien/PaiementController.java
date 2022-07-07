@@ -52,7 +52,6 @@ public class PaiementController {
 
     @PutMapping("/listAntecedent")
     public List<PaiementDto> findAll(Integer ideleve) {
-        //  return paiementService.findAllAntecedent(12169).map(this::convertEntityToDto);
         return paiementService.findAllAntecedent(12169).stream().map(this::convertEntityToDto).collect(Collectors.toList());
     }
 
