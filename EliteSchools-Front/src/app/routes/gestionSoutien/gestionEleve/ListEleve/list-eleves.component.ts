@@ -13,7 +13,7 @@ export class ListElevesComponent implements OnInit {
   public listeleve: any;
   loadingDots!: boolean;
   currentPage: number = 0;
-  size: number = 5
+  size: number = 6
   pages: any;
   totalRecords!: number;
   imageLocation = './assets/images/' ;
